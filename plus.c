@@ -10,7 +10,7 @@
 // @dev convert the number to string, then reverse them to do calculate in
 // little endian after that add them like what you learn from first grade
 // @return the pointer to big endian of the result
-char *add(char *_string1, char *_string2) {
+char *plus(char *_string1, char *_string2) {
     char *p1, *p2;
     int length_1, length_2;
     // @notice The longer string is p2 and length_2
@@ -68,24 +68,9 @@ char *add(char *_string1, char *_string2) {
         result[i] = digits[sum];
     }
 
+    // reverse back the 2 input to normal
+    rev(_string1);
+    rev(_string2);
     // reverse the result show it return big endian
     return rev(result);
-}
-
-int main(void)
-{
-    char number1[MAX_STR];
-    char number2[MAX_STR];
-    printf("please insert a number: ");
-    scanf("%s", number1);
-    printf("please insert a number: ");
-    scanf("%s", number2);
-
-    char *number = add(number1, number2);
-    printf("The sum is: ");
-    for(int i = 0; i < strlen(number); i++)
-        printf("%c", number[i]);
-    printf("\n");
-    free(number);
-    return 0;
 }

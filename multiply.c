@@ -115,7 +115,7 @@ char *mul(char *str1, char *str2) {
 
         // @notice start from the number i,
         // check if the the array p2 at xth element is NULL
-        // if there is still a reaminder then add it to the MSB
+        // if there is still a remainder then add it to the MSB
         for (int x = i; p2[x - i] != 0 || remainder > 0; x++) {
             int product;
             // check if the element of p2 is NULL if yes add 1 to product
@@ -152,15 +152,27 @@ char *mul(char *str1, char *str2) {
     return rev(result);
 }
 
+// @param string: the number you need to factorial
 char *factorial(char *string) {
+    // This variable is an incremental number to multiply the result
     char *str = (char *)malloc(4 * sizeof(char));
+    // This variable is a pointer to another heap so that we can free it
+    char *temp;
+    // Initialize the result
     char *result = (char *)malloc(MAX_STR * sizeof(char));
+
+    // set result to 1
     result = "1";
     str = "0";
+
     for (int i = 0; i < atoi(string); i++) {
+        temp = str;
         str = rev(add(str, "1"));
+        free(temp);
+
         result = mul(result, str);
     }
+
     free(str);
     return result;
 }
