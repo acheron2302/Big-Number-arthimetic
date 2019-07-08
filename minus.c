@@ -1,41 +1,50 @@
+#ifndef MINUS
+#define MINUS
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
 #include "header.h"
 
-char *subtract(char *num1, char *num2) {
-    int length1 = strlen(num1);
-    int length2 = strlen(num2);
-    int MAX_LENGTH;
+char *subtract(char *_num1, char *_num2) {
+    int length1 = strlen(_num1);
+    int length2 = strlen(_num2);
     char *p1;
     char *p2;
     char *result;
     bool remainder = false;
     bool negative = false;
 
-    // check if num1 is greater than num2 if true then the result is a negative number
-    if(
-        (length1 < length2) ||
-        (num1[length1 - 1] < num2[length2 - 1] && length1 == length2)
-    ) {
+
+
+    // check if _num1 is smaller than _num2 if true then the result is a negative number
+    // first check if number2 is longer than number1
+    if( length1 < length2) {
         negative = true;
+    } else if (length1 == length2) { // second if number2 and number1 length is equal
+        // If the first chracter that does not match have the lower value
+        // in _num1 than _num2 then that _num1 is greater than _num2
+        if(strcmp(_num1, _num2) < 0)
+            negative = true;
     }
 
-    // swap if the result is a negative number
+    // swap 2 number if the result is a negative number
     if(negative == true) {
-        p1 = rev(num2);
-        p2 = rev(num1);
+        p1 = rev(_num2);
+        p2 = rev(_num1);
     } else {
-        p1 = rev(num1);
-        p2 = rev(num2);
+        p1 = rev(_num1);
+        p2 = rev(_num2);
     }
 
-    MAX_LENGTH = (strlen(num1) > strlen(num2)) ? strlen(num1) : strlen(num2);
 
-    result = (char *)calloc(MAX_LENGTH, sizeof(char));
+    // find the number that its length is longer
+    int longest_length = (strlen(_num1) > strlen(_num2)) ? strlen(_num1) : strlen(_num2);
 
-    for(int i = 0; i < MAX_LENGTH; p1++, p2++, i++) {
+    result = (char *)calloc(longest_length + 2, sizeof(char));
+
+    for(int i = 0; i < longest_length; p1++, p2++, i++) {
         int number1, number2;
 
         // convert ascii to integer for calc
@@ -72,15 +81,12 @@ char *subtract(char *num1, char *num2) {
         result[i] = digits[subtract_result];
     }
 
-    for (; result[strlen(result) - 1] == '0';) {
-        result[strlen(result) - 1] = '\0';
-    }
-
     if(negative == true) {
         result[strlen(result)] = '-';
     }
 
-    rev(num1);
-    rev(num2);
+    rev(_num1);
+    rev(_num2);
     return rev(result);
 }
+#endif /* end of include guard */
