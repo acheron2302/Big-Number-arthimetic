@@ -26,7 +26,7 @@ int numlify(char number) {
  *
  * From i = 0 to n + 1 do:
  * \f{eqnarray*} {
- *      q_i = (u_i \times num2 + remainder) \bmod 10 \\
+ *      q_i = (u_i \times num2 + remainder) \bmod 10 \quad \textrm{with} \quad 0 \leq u_i < ||u|| + 1\\
  *      r = \frac{u_i \times num2 + remainder}{10} \\
  *      u_i = \left\{\begin{matrix}
  *            & 0   & \textrm{if} \quad i > n \\
@@ -64,10 +64,12 @@ char *single_mul1(char *num1, char num2) {
     return result;
 }
 
-/// @brief A function to multiply a big number with a single digit number
-/// Like @ref single_mul1 but no leading 0 (
-/// \f$ \textrm{if} \quad q_{n+1} \equiv 0 \Rightarrow q_{n+1} = \emptyset \f$).
-/// @copydetails single_mul1()
+/** @brief A function to multiply a big number with a single digit number
+ *
+ * Like @ref single_mul1 but no leading 0 (
+ * \f$ \textrm{if} \quad q_{n+1} \equiv 0 \Rightarrow q_{n+1} = \emptyset \f$).
+ * @copydetails single_mul1()
+ */
 char *single_mul2(char *num1, char num2) {
     // initilize the heap to return the result pointer to
     char *result = (char *)calloc(strlen(num1) + 1, sizeof(char));
@@ -136,10 +138,19 @@ char *short_division(char *num1, char num2, bool return_remainder) {
     }
 }
 
+// This division is taken from knuth long division from the art of computer programming
 char *division(char *num1, char *num2) {
     int x = 0;
     int len2 = strlen(num2);
     int d;
+    char quotient;
+    char remain;
+    // The heap to return
+    char *result = (char *)calloc(strlen(num1) - strlen(num2), sizeof(char));
+    char *nums1 = single_mul1(num1, d);
+    char *nums2 = single_mul2(num2, d);
+    char *divisor;
+    char *temp;
 
     // Find d so that nums2[0] >= 5
     if(num2[0] >= '5') {
@@ -155,23 +166,14 @@ char *division(char *num1, char *num2) {
             free(temp);
         }
     }
-    char quotient;
-    char remain;
 
-    // The result heap to return
-    char *result = (char *)calloc(strlen(num1) - strlen(num2), sizeof(char));
-    char *nums1 = single_mul1(num1, d);
-    char *nums2 = single_mul2(num2, d);
-    char *divisor;
-    char *temp;
-
-    // @param diff the different between the length of num1 and num2
+    // the main division alogrithm
     for(int i = 0; i <= (strlen(num1) - strlen(num2)); i++) {
         quotient = (numlify(nums1[i]) * 10 + numlify(nums1[i + 1])) / numlify(nums2[0]);
         remain = (numlify(nums1[i]) * 10 + numlify(nums1[i + 1])) % numlify(nums2[0]);
 
         divisor = (char *)calloc(len2 + 3, sizeof(char));
-        // move the digits nums1 to the biggest digit that can be divided to nums2
+        // take len2 + 1 digit digit from nums1[i] and copy it to divisor for division
         strncpy(divisor, nums1 + i, len2 + 1);
 
         // test if quotient equal to 10 or quotient * nums[length2 - 2] > 10 * remainder + nums1[diff + length2 - 2]
