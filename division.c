@@ -20,14 +20,18 @@ int numlify(char number) {
  *
  * It gonna loop through every element of the list and divide the each digit of the dividend by divisor
  *
- * Let the dividend be \f$ u = (u_0u_1...u_{n-1}) \f$ with \f$ n = ||num1|| \f$
- * result quotient be \f$ q = (q_0q_1...q_{n})\f$
+ * Let the multplier be \f$ u = (u_{n}u_{n-1}...u_0) \f$ \textrm{with} \f$ n = ||num1|| \f$
+ * result quotient be \f$ q = (q_{n+1}q_{n}...q_0)\f$
  * and the remainder \f$ r \f$
  *
- * For each loop from i = 0
+ * From i = 0 to n + 1 do:
  * \f{eqnarray*} {
  *      q_i = (u_i \times num2 + remainder) \bmod 10 \\
- *      r = \frac{u_i \times num2 + remainder}{10}
+ *      r = \frac{u_i \times num2 + remainder}{10} \\
+ *      u_i = \left\{\begin{matrix}
+ *            & 0   & \textrm{if} \quad i > n \\
+ *            & u_i & \textrm{else}
+ *            \end{matrix}\right.
  * \f}
  * @param *num1 the pointer to a big number
  * @param num2 a single digit number
@@ -61,7 +65,8 @@ char *single_mul1(char *num1, char num2) {
 }
 
 /// @brief A function to multiply a big number with a single digit number
-/// Like @ref single_mul1 but no leading 0
+/// Like @ref single_mul1 but no leading 0 (
+/// \f$ \textrm{if} \quad q_{n+1} \equiv 0 \Rightarrow q_{n+1} = \emptyset \f$).
 /// @copydetails single_mul1()
 char *single_mul2(char *num1, char num2) {
     // initilize the heap to return the result pointer to
@@ -96,7 +101,7 @@ char *single_mul2(char *num1, char num2) {
  * \f{eqnarray*} {
  *      q_i = \frac{u_i + remainder \times 10}{10}
  *      \quad \textrm{with} \quad 0 \leq i < ||u||\\
- *      r = {u_i + remainder \times 10} \bmod 10
+ *      r = (u_i + remainder \times 10) \bmod 10
  * \f}
  * @param *num1 the pointer the a big number
  * @param num2 a number that is between 0 and 10
@@ -190,7 +195,7 @@ char *division(char *num1, char *num2) {
         free(temp);
         free(product);
 
-        // if the result of the last subtract is smaller than 1 minus 1 to the quotient
+        // if the result of the last subtract is negative. Minus 1 to the quotient
         // and then add the divisor to the remainder
         if(divisor[0] == '-') {
             // calculate the absolute of divisor by remove the minus sign in the beginning
@@ -202,13 +207,12 @@ char *division(char *num1, char *num2) {
             * so we fix it by remove the first 0 digit and do the subtract,
             * then we add the first 0 back to the result of that division
             */
-            // this variable is true when the first 2 digit of num2 is 0
             // this varialbe check if there is a need to add back 0 at the beginning after the subtract
             bool check_2 = 0;
             if(divisor[0] == '0' && divisor[1] == '0') {
                 memmove(divisor, divisor + 1, len2);
                 divisor[strlen(divisor) - 1] = '\0';
-                check_2 = 1;
+                check_2 = 1; // check_2 is true so that the next if statement is gonna execute
             }
 
             quotient -= 1;
@@ -221,11 +225,13 @@ char *division(char *num1, char *num2) {
             if(check_2)
                 memmove(divisor + 1, divisor, strlen(divisor));
 
-            // let nums1 be the remainder and for the next digit division
+            // let nums1 be the remainder concatenate with the next nums1[len2 + i + 1]
+            // and repeat the loop if the condition haven't been satisfy
             memmove(nums1 + i, divisor, len2 + 1);
             free(divisor);
         }else{
-            // let nums1 be the remainder and for the next digit division
+            // let nums1 be the remainder concatenate with the next nums1[len2 + i + 1]
+            // and repeat the loop if the condition haven't been satisfy
             memmove(nums1 + i, divisor, len2 + 1);
             free(divisor);
         }
