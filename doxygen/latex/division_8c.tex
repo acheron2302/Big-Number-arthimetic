@@ -1,0 +1,129 @@
+\hypertarget{division_8c}{}\section{division.\+c File Reference}
+\label{division_8c}\index{division.\+c@{division.\+c}}
+
+
+alogrithm to divide 2 big number  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include $<$math.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}multiply.\+c\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}minus.\+c\char`\"{}}\newline
+Include dependency graph for division.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{division_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{division_8c_a837fca71c0dbe1e78306fd84b2ecce94}\label{division_8c_a837fca71c0dbe1e78306fd84b2ecce94}} 
+int \hyperlink{division_8c_a837fca71c0dbe1e78306fd84b2ecce94}{numlify} (char number)
+\begin{DoxyCompactList}\small\item\em Turn a chracter number into a number it correspond. \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{division_8c_afecb40d071837cf844da7c2d4ca78d77}{single\+\_\+mul1} (char $\ast$num1, char num2)
+\begin{DoxyCompactList}\small\item\em A function to multiply a big number with a single digit number. \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{division_8c_a94935f965de39ecb1791015f70b1baa4}{single\+\_\+mul2} (char $\ast$num1, char num2)
+\begin{DoxyCompactList}\small\item\em A function to multiply a big number with a single digit number. \end{DoxyCompactList}\item 
+char $\ast$ \hyperlink{division_8c_aa6cf810bc16116c5c6ab0daeb282f34d}{short\+\_\+division} (char $\ast$num1, char num2, bool return\+\_\+remainder)
+\begin{DoxyCompactList}\small\item\em divsion of a big number by a single digit number \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{division_8c_a7a452eb97fd19537885192e73e6a9bc4}\label{division_8c_a7a452eb97fd19537885192e73e6a9bc4}} 
+char $\ast$ {\bfseries division} (char $\ast$num1, char $\ast$num2)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+alogrithm to divide 2 big number 
+
+\begin{DoxyAuthor}{Author}
+Kishou Yusa 
+\end{DoxyAuthor}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{division_8c_aa6cf810bc16116c5c6ab0daeb282f34d}\label{division_8c_aa6cf810bc16116c5c6ab0daeb282f34d}} 
+\index{division.\+c@{division.\+c}!short\+\_\+division@{short\+\_\+division}}
+\index{short\+\_\+division@{short\+\_\+division}!division.\+c@{division.\+c}}
+\subsubsection{\texorpdfstring{short\+\_\+division()}{short\_division()}}
+{\footnotesize\ttfamily char$\ast$ short\+\_\+division (\begin{DoxyParamCaption}\item[{char $\ast$}]{num1,  }\item[{char}]{num2,  }\item[{bool}]{return\+\_\+remainder }\end{DoxyParamCaption})}
+
+
+
+divsion of a big number by a single digit number 
+
+Let the dividend be $ u = (u_0u_1...u_{n-1}) $ with $ n = ||num1|| $, the divisor is a single number between 0 and 10 the quotient is $ q = (q_0q_1...q_{n})$ . If divisor is 0 return error, if not do the following\+: \begin{eqnarray*} { q_i = \frac{u_i + remainder \times 10}{10} \quad \textrm{with} \quad 0 \leq i < ||u||\\ r = (u_i + remainder \times 10) \bmod 10 \end{eqnarray*} 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$num1} & the pointer the a big number \\
+\hline
+{\em num2} & a number that is between 0 and 10 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The pointer to the heap that contain the quotient (or the remainder if return\+\_\+remainder is true) 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Remember to clear the result after it have been used 
+
+If {\ttfamily num2} is zero then it will terminate the function and return back \begin{quote}
+E\+R\+R\+OR\+: C\+A\+N\+N\+OT D\+I\+V\+I\+DE BY 0\end{quote}
+
+\end{DoxyWarning}
+\mbox{\Hypertarget{division_8c_afecb40d071837cf844da7c2d4ca78d77}\label{division_8c_afecb40d071837cf844da7c2d4ca78d77}} 
+\index{division.\+c@{division.\+c}!single\+\_\+mul1@{single\+\_\+mul1}}
+\index{single\+\_\+mul1@{single\+\_\+mul1}!division.\+c@{division.\+c}}
+\subsubsection{\texorpdfstring{single\+\_\+mul1()}{single\_mul1()}}
+{\footnotesize\ttfamily char$\ast$ single\+\_\+mul1 (\begin{DoxyParamCaption}\item[{char $\ast$}]{num1,  }\item[{char}]{num2 }\end{DoxyParamCaption})}
+
+
+
+A function to multiply a big number with a single digit number. 
+
+It gonna loop through every element of the list and divide the each digit of the dividend by divisor
+
+Let the multplier be $ u = (u_{n}u_{n-1}...u_0) $ \{with\} $ n = ||num1|| $ result quotient be $ q = (q_{n+1}q_{n}...q_0)$ and the remainder $ r $
+
+From i = 0 to n + 1 do\+: \begin{eqnarray*} { q_i = (u_i \times num2 + remainder) \bmod 10 \quad \textrm{with} \quad 0 \leq u_i < ||u|| + 1\\ r = \frac{u_i \times num2 + remainder}{10} \\ u_i = \left\{\begin{matrix} & 0 & \textrm{if} \quad i > n \\ & u_i & \textrm{else} \end{matrix}\right. \end{eqnarray*} 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$num1} & the pointer to a big number \\
+\hline
+{\em num2} & a single digit number \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The pointer to the result 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Remember to clear the result after it have been used 
+\end{DoxyWarning}
+\mbox{\Hypertarget{division_8c_a94935f965de39ecb1791015f70b1baa4}\label{division_8c_a94935f965de39ecb1791015f70b1baa4}} 
+\index{division.\+c@{division.\+c}!single\+\_\+mul2@{single\+\_\+mul2}}
+\index{single\+\_\+mul2@{single\+\_\+mul2}!division.\+c@{division.\+c}}
+\subsubsection{\texorpdfstring{single\+\_\+mul2()}{single\_mul2()}}
+{\footnotesize\ttfamily char$\ast$ single\+\_\+mul2 (\begin{DoxyParamCaption}\item[{char $\ast$}]{num1,  }\item[{char}]{num2 }\end{DoxyParamCaption})}
+
+
+
+A function to multiply a big number with a single digit number. 
+
+Like \hyperlink{division_8c_afecb40d071837cf844da7c2d4ca78d77}{single\+\_\+mul1} but no leading 0 ( $ \textrm{if} \quad q_{n+1} \equiv 0 \Rightarrow q_{n+1} = \emptyset $). It gonna loop through every element of the list and divide the each digit of the dividend by divisor
+
+Let the multplier be $ u = (u_{n}u_{n-1}...u_0) $ \{with\} $ n = ||num1|| $ result quotient be $ q = (q_{n+1}q_{n}...q_0)$ and the remainder $ r $
+
+From i = 0 to n + 1 do\+: \begin{eqnarray*} { q_i = (u_i \times num2 + remainder) \bmod 10 \quad \textrm{with} \quad 0 \leq u_i < ||u|| + 1\\ r = \frac{u_i \times num2 + remainder}{10} \\ u_i = \left\{\begin{matrix} & 0 & \textrm{if} \quad i > n \\ & u_i & \textrm{else} \end{matrix}\right. \end{eqnarray*} 
+\begin{DoxyParams}{Parameters}
+{\em $\ast$num1} & the pointer to a big number \\
+\hline
+{\em num2} & a single digit number \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The pointer to the result 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+Remember to clear the result after it have been used 
+\end{DoxyWarning}

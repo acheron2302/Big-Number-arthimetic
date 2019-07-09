@@ -1,0 +1,35 @@
+\documentclass{article}
+\usepackage{epsfig}
+% Packages requested by user
+\usepackage{amsmath}
+
+\pagestyle{empty}
+\begin{document}
+$ u = (u_{n}u_{n-1}...u_0) $
+\pagebreak
+
+$ n = ||num1|| $
+\pagebreak
+
+$ q = (q_{n+1}q_{n}...q_0)$
+\pagebreak
+
+$ r $
+\pagebreak
+
+\begin{eqnarray*} { q_i = (u_i \times num2 + remainder) \bmod 10 \quad \textrm{with} \quad 0 \leq u_i < ||u|| + 1\\ r = \frac{u_i \times num2 + remainder}{10} \\ u_i = \left\{\begin{matrix} & 0 & \textrm{if} \quad i > n \\ & u_i & \textrm{else} \end{matrix}\right. \end{eqnarray*}
+\pagebreak
+
+$ \textrm{if} \quad q_{n+1} \equiv 0 \Rightarrow q_{n+1} = \emptyset $
+\pagebreak
+
+$ u = (u_0u_1...u_{n-1}) $
+\pagebreak
+
+$ q = (q_0q_1...q_{n})$
+\pagebreak
+
+\begin{eqnarray*} { q_i = \frac{u_i + remainder \times 10}{10} \quad \textrm{with} \quad 0 \leq i < ||u||\\ r = (u_i + remainder \times 10) \bmod 10 \end{eqnarray*}
+\pagebreak
+
+\end{document}

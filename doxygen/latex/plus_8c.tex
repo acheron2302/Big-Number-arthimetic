@@ -1,0 +1,62 @@
+\hypertarget{plus_8c}{}\section{plus.\+c File Reference}
+\label{plus_8c}\index{plus.\+c@{plus.\+c}}
+
+
+Addition with 2 big number.  
+
+
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdbool.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}header.\+h\char`\"{}}\newline
+Include dependency graph for plus.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{plus_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+char $\ast$ \hyperlink{plus_8c_a4ba19d79680d0a771d37d3fb35684961}{plus} (char $\ast$\+\_\+string1, char $\ast$\+\_\+string2)
+\begin{DoxyCompactList}\small\item\em Addition between two big number. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Addition with 2 big number. 
+
+\begin{DoxyAuthor}{Author}
+Kishou Yusa 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2019-\/06-\/28 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{plus_8c_a4ba19d79680d0a771d37d3fb35684961}\label{plus_8c_a4ba19d79680d0a771d37d3fb35684961}} 
+\index{plus.\+c@{plus.\+c}!plus@{plus}}
+\index{plus@{plus}!plus.\+c@{plus.\+c}}
+\subsubsection{\texorpdfstring{plus()}{plus()}}
+{\footnotesize\ttfamily char $\ast$ plus (\begin{DoxyParamCaption}\item[{char $\ast$}]{\+\_\+string1,  }\item[{char $\ast$}]{\+\_\+string2 }\end{DoxyParamCaption})}
+
+
+
+Addition between two big number. 
+
+Convert the number to string, then reverse them to do calculate in little endian after that add them like what you learn from first grade 
+\begin{DoxyParams}{Parameters}
+{\em \+\_\+string1} & The pointer first big number \\
+\hline
+{\em \+\_\+string2} & The pointer second big number \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The pointer to big endian of the result 
+\end{DoxyReturn}
+\begin{DoxyWarning}{Warning}
+remember to free the pointer because it use max($\vert$\+\_\+string1$\vert$, $\vert$\+\_\+string1$\vert$) space in heap 
+\end{DoxyWarning}
